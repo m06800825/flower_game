@@ -13,11 +13,11 @@ if __name__ == "__main__":
     canvas = pg.display.set_mode((canvas_width, canvas_height))
     pg.display.set_caption("Anniversary game")
 
-    sky = pg.image.load("image\sky.jpg")
+    sky = pg.image.load(os.path.join('image', 'sky.jpg'))
     sky = pg.transform.scale(sky, (1200, 800))
 
-    canvas.blit(sky, (0,0))
-    pg.display.update()
+    flower = pg.image.load(os.path.join('image', 'flower_no_bg.png')).convert_alpha ()
+    flower = pg.transform.scale(flower, (70, 70))
 
     clock = pg.time.Clock()
     font = pg.font.SysFont('simhei', 18)
@@ -29,6 +29,7 @@ if __name__ == "__main__":
 
     running = True
     while running:
+        clock.tick(30)
         for event in pg.event.get():
             # 離開遊戲.
             if event.type == pg.QUIT:
@@ -47,10 +48,9 @@ if __name__ == "__main__":
                     game_mode = 1
 
         # canvas.fill(background)
-        # canvas.blit(sky,(0,0))
-
+        canvas.blit(sky, (0,0))
+        canvas.blit(flower, (0,0))
         pg.display.update()
-        clock.tick(60)
 
     pg.quit()
     quit()
