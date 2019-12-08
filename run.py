@@ -5,6 +5,7 @@ import math
 from obj.flower import Flower
 from obj.role import Role
 
+
 def count_second(start_time):
     last_time = time.time()
     total_time = math.floor(last_time - start_time)
@@ -41,7 +42,7 @@ if __name__ == "__main__":
     # initialize game message
     score_font = pg.font.SysFont("Arial", 40)
     time_font = pg.font.SysFont("Arial", 40)
-    start_font = pg.font.SysFont("Arial", 60)
+    message_font = pg.font.SysFont("Arial", 60)
     end_msg = ""
     start_msg = "[PRESS SPACE TO START]"
 
@@ -117,8 +118,8 @@ if __name__ == "__main__":
         roles.draw(canvas)
 
         if not playing:
-            end_logo = start_font.render(end_msg, True, (0, 0, 255))
-            start_logo = start_font.render(start_msg, True, (0, 0, 255))
+            end_logo = message_font.render(end_msg, True, (0, 0, 255))
+            start_logo = message_font.render(start_msg, True, (0, 0, 255))
             canvas.blit(end_logo, (450, 330))
             canvas.blit(start_logo, (300, 400))
 
