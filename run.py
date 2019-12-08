@@ -3,9 +3,16 @@ import cv2
 import os, sys, random
 import pygame as pg
 import time
+import math
 from obj.flower import Flower
 from obj.role import Role
 from pygame.locals import *
+
+def count_second(start_time):
+    last_time = time.time()
+    total_time = math.floor(last_time - start_time)
+    return total_time
+
 
 if __name__ == "__main__":
     pg.init()
@@ -18,6 +25,7 @@ if __name__ == "__main__":
     clock = pg.time.Clock()
     start_time = time.time()
     score_font = pg.font.SysFont("Arial", 40)
+    time_font = pg.font.SysFont("Arial", 40)
     start_font = pg.font.SysFont("Arial", 60)
 
     sky = pg.image.load(os.path.join('image', 'grassland.png'))
@@ -28,11 +36,10 @@ if __name__ == "__main__":
     allsprite = pg.sprite.Group()
     allsprite.add(role)
 
-    # 0: wait to begin
-    # 1: game is running
     playing = False
     flower_index = 0
     score = 0
+    sec = 0
 
     running = True
     while running:
@@ -52,6 +59,8 @@ if __name__ == "__main__":
                     role.speed = -20
                 elif event.key == pg.K_RIGHT:
                     role.speed = 20
+                elif event.key == pg.K_DOWN:
+                    role.speed = 0
                 # start playing 
                 if event.key == pg.K_SPACE:
                     if not playing:
@@ -59,12 +68,17 @@ if __name__ == "__main__":
                         score = 0
                         role.speed = 0
                         start_time = time.time()
+                        gen_flower_time = time.time()
         
         if playing:
-            time_difference = int((time.time() - start_time) * 1000)
+            sec = count_second(start_time)
+            if sec == 30:
+                playing = False
+
+            time_difference = int((time.time() - gen_flower_time) * 1000)
             # Flower
             if time_difference > 500:
-                start_time += 0.5 # generate a flower per 0.5 second
+                gen_flower_time += 0.5 # generate a flower per 0.5 second
                 flower_index += 1
                 f = Flower(flower_index)
                 flowers.add(f)
@@ -83,14 +97,19 @@ if __name__ == "__main__":
         score_msg = "Score: " + str(score)
         score_msg = score_font.render(score_msg, True, (255, 0, 0))
 
+        # update time
+        time_msg = "Time: " + str(30-sec)
+        time_msg = time_font.render(time_msg, True, (255, 0, 0))
+
         canvas.blit(sky, (0,0))
         canvas.blit(score_msg, (10, 10))
+        canvas.blit(time_msg, (1050, 10))
         flowers.draw(canvas)
         allsprite.draw(canvas)
 
         if not playing:
             start_msg = "[PRESS SPACE TO START]"
-            start_msg = start_font.render(start_msg, True, (0, 0, 255), (0, 0, 0))
+            start_msg = start_font.render(start_msg, True, (0, 0, 255))
             canvas.blit(start_msg, (300, 400))
 
         pg.display.update()
