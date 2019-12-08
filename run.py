@@ -18,6 +18,7 @@ if __name__ == "__main__":
     clock = pg.time.Clock()
     start_time = time.time()
     score_font = pg.font.SysFont("Arial", 40)
+    start_font = pg.font.SysFont("Arial", 60)
 
     sky = pg.image.load(os.path.join('image', 'grassland.png'))
     sky = pg.transform.scale(sky, (1200, 800))
@@ -53,8 +54,9 @@ if __name__ == "__main__":
                     role.speed = 20
                 # start playing 
                 if event.key == pg.K_SPACE:
-                    if(playing == False):
+                    if not playing:
                         playing = True
+                        score = 0
                         role.speed = 0
                         start_time = time.time()
         
@@ -79,12 +81,18 @@ if __name__ == "__main__":
 
         # update score
         score_msg = "Score: " + str(score)
-        message = score_font.render(score_msg, True, (255, 0, 0))
+        score_msg = score_font.render(score_msg, True, (255, 0, 0))
 
         canvas.blit(sky, (0,0))
-        canvas.blit(message, (10, 10))
+        canvas.blit(score_msg, (10, 10))
         flowers.draw(canvas)
         allsprite.draw(canvas)
+
+        if not playing:
+            start_msg = "[PRESS SPACE TO START]"
+            start_msg = start_font.render(start_msg, True, (0, 0, 255), (0, 0, 0))
+            canvas.blit(start_msg, (300, 400))
+
         pg.display.update()
 
     pg.quit()
