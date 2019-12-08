@@ -16,8 +16,8 @@ class Role(pg.sprite.Sprite):
         self.speed = 0
 
     def update(self):
-        self.rect.x += self.speed       #滑鼠x坐標
-        # 不要移出右邊界
+        self.rect.x += self.speed
+        # check not to exceed canvas
         if self.rect.x > (1200 - self.rect.width):
             self.rect.x = 1200 - self.rect.width
         elif self.rect.x < 0:
