@@ -1,10 +1,14 @@
 import pygame as pg
 import os
 
-class Jane(pg.sprite.Sprite):
-    def __init__(self):
+class Role(pg.sprite.Sprite):
+    def __init__(self, name="ken"):
         pg.sprite.Sprite.__init__(self)
-        self.image = pg.image.load(os.path.join('image', 'jane_removebg.png')).convert_alpha ()
+        self.name = name
+        if name == "jane":
+            self.image = pg.image.load(os.path.join('image', 'jane_removebg.png')).convert_alpha ()
+        else:
+            self.image = pg.image.load(os.path.join('image', 'ken_removebg.png')).convert_alpha ()
         self.image = pg.transform.scale(self.image, (150, 200))
         self.rect = self.image.get_rect()
         self.rect.x = 525
