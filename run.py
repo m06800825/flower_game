@@ -3,8 +3,8 @@ import cv2
 import os, sys, random
 import pygame as pg
 import time
-from role.flower import Flower
-from role.role import Role
+from obj.flower import Flower
+from obj.role import Role
 from pygame.locals import *
 
 if __name__ == "__main__":
@@ -23,7 +23,9 @@ if __name__ == "__main__":
     clock = pg.time.Clock()
     start_time = time.time()
     font = pg.font.SysFont('simhei', 18)
+    score_font = pg.font.SysFont("Arial", 40)
 
+    flowers = pg.sprite.Group()
     allsprite = pg.sprite.Group()
     allsprite.add(role)
 
@@ -31,6 +33,7 @@ if __name__ == "__main__":
     # 1: game is running
     game_mode = 0
     flower_index = 0
+    score = 0
 
     running = True
     while running:
@@ -42,9 +45,7 @@ if __name__ == "__main__":
             start_time += 0.5 # generate a flower per 0.5 second
             flower_index += 1
             f = Flower(flower_index)
-            print('index:', flower_index)
-            allsprite.add(f)
-
+            flowers.add(f)
 
         for event in pg.event.get():
             # leave game
@@ -66,13 +67,23 @@ if __name__ == "__main__":
                 if(game_mode == 0):
                     game_mode = 1
         
+        # detect collide
+        hit_flower = pg.sprite.spritecollide(role, flowers, True)  
+        if len(hit_flower) > 0:
+            score += len(hit_flower)
+
         # update objects
         role.update()
-        for flower in allsprite:
-            if hasattr(flower, 'index'):
-                flower.update()
+        for flower in flowers:
+            flower.update()
+
+        # update score
+        score_msg = "Score: " + str(score)
+        message = score_font.render(score_msg, 10, (255, 0, 0))
 
         canvas.blit(sky, (0,0))
+        canvas.blit(message, (10, 10))
+        flowers.draw(canvas)
         allsprite.draw(canvas)
         pg.display.update()
 
