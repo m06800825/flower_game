@@ -19,13 +19,13 @@ if __name__ == "__main__":
 
     # initialize game window
     canvas_width = 1200
-    canvas_height = 800
+    canvas_height = 750
     canvas = pg.display.set_mode((canvas_width, canvas_height))
     pg.display.set_caption("Anniversary game")
 
     # initialize background
-    sky = pg.image.load(os.path.join('image', 'grassland.png'))
-    sky = pg.transform.scale(sky, (1200, 800))
+    grassland = pg.image.load(os.path.join('image', 'grassland.png'))
+    grassland = pg.transform.scale(grassland, (1200, 750))
 
     # initialize time
     clock = pg.time.Clock()
@@ -113,7 +113,7 @@ if __name__ == "__main__":
         time_msg = "Time: " + str(30-sec)
         time_msg = time_font.render(time_msg, True, (255, 100, 0))
 
-        canvas.blit(sky, (0,0))
+        canvas.blit(grassland, (0,0))
         canvas.blit(score_msg, (10, 10))
         canvas.blit(time_msg, (1050, 10))
         flowers.draw(canvas)

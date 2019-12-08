@@ -12,7 +12,7 @@ class Role(pg.sprite.Sprite):
         self.image = pg.transform.scale(self.image, (150, 200))
         self.rect = self.image.get_rect()
         self.rect.x = 525
-        self.rect.y = 600
+        self.rect.y = 550
         self.speed = 0
 
     def update(self):
