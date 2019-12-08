@@ -17,32 +17,38 @@ def count_second(start_time):
 if __name__ == "__main__":
     pg.init()
 
+    # initialize game window
     canvas_width = 1200
     canvas_height = 800
     canvas = pg.display.set_mode((canvas_width, canvas_height))
     pg.display.set_caption("Anniversary game")
 
+    # initialize background
+    sky = pg.image.load(os.path.join('image', 'grassland.png'))
+    sky = pg.transform.scale(sky, (1200, 800))
+
+    # initialize time
     clock = pg.time.Clock()
     start_time = time.time()
+    sec = 0
+
+    # initialize group
+    flowers = pg.sprite.Group()
+    roles = pg.sprite.Group()
+    role = Role("jane")
+    roles.add(role)
+
+    # initialize score
+    score = 0
+
+    # initialize game message
     score_font = pg.font.SysFont("Arial", 40)
     time_font = pg.font.SysFont("Arial", 40)
     start_font = pg.font.SysFont("Arial", 60)
-
-    sky = pg.image.load(os.path.join('image', 'grassland.png'))
-    sky = pg.transform.scale(sky, (1200, 800))
-    role = Role("jane")
-
-    flowers = pg.sprite.Group()
-    allsprite = pg.sprite.Group()
-    allsprite.add(role)
-
-    # initialize
-    score = 0
-    sec = 0
-    # game message
     end_msg = ""
     start_msg = "[PRESS SPACE TO START]"
 
+    # initialize game status
     playing = False
     running = True
     while running:
@@ -111,7 +117,7 @@ if __name__ == "__main__":
         canvas.blit(score_msg, (10, 10))
         canvas.blit(time_msg, (1050, 10))
         flowers.draw(canvas)
-        allsprite.draw(canvas)
+        roles.draw(canvas)
 
         if not playing:
             end_logo = start_font.render(end_msg, True, (0, 0, 255))
