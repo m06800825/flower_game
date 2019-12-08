@@ -51,11 +51,12 @@ if __name__ == "__main__":
                     role.speed = -20
                 elif event.key == pg.K_RIGHT:
                     role.speed = 20
-            # check mouse
-            if event.type == pg.MOUSEBUTTONDOWN:
-                if(playing == False):
-                    playing = True
-                    start_time = time.time()
+                # start playing 
+                if event.key == pg.K_SPACE:
+                    if(playing == False):
+                        playing = True
+                        role.speed = 0
+                        start_time = time.time()
         
         if playing:
             time_difference = int((time.time() - start_time) * 1000)
