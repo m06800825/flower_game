@@ -1,12 +1,9 @@
-import numpy as np
-import cv2
-import os, sys, random
+import os
 import pygame as pg
 import time
 import math
 from obj.flower import Flower
 from obj.role import Role
-from pygame.locals import *
 
 def count_second(start_time):
     last_time = time.time()
@@ -35,7 +32,7 @@ if __name__ == "__main__":
     # initialize group
     flowers = pg.sprite.Group()
     roles = pg.sprite.Group()
-    role = Role("jane")
+    role = Role("ken")
     roles.add(role)
 
     # initialize score

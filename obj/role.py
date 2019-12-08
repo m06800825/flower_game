@@ -5,11 +5,11 @@ class Role(pg.sprite.Sprite):
     def __init__(self, name="ken"):
         pg.sprite.Sprite.__init__(self)
         self.name = name
-        if name == "jane":
+        if self.name == "jane":
             self.image = pg.image.load(os.path.join('image', 'jane_removebg.png')).convert_alpha ()
         else:
             self.image = pg.image.load(os.path.join('image', 'ken_removebg.png')).convert_alpha ()
-        self.image = pg.transform.scale(self.image, (150, 200))
+        self.image = pg.transform.scale(self.image, (125, 200))
         self.rect = self.image.get_rect()
         self.rect.x = 525
         self.rect.y = 550
