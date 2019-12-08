@@ -36,11 +36,14 @@ if __name__ == "__main__":
     allsprite = pg.sprite.Group()
     allsprite.add(role)
 
-    playing = False
-    flower_index = 0
+    # initialize
     score = 0
     sec = 0
+    # game message
+    end_msg = ""
+    start_msg = "[PRESS SPACE TO START]"
 
+    playing = False
     running = True
     while running:
         clock.tick(30)
@@ -65,22 +68,25 @@ if __name__ == "__main__":
                 if event.key == pg.K_SPACE:
                     if not playing:
                         playing = True
+                        flowers.empty()
+                        # initailize
                         score = 0
                         role.speed = 0
+                        role.rect.x = 525
                         start_time = time.time()
                         gen_flower_time = time.time()
         
         if playing:
             sec = count_second(start_time)
             if sec == 30:
+                end_msg = "[GAME OVER]"
                 playing = False
 
             time_difference = int((time.time() - gen_flower_time) * 1000)
             # Flower
             if time_difference > 500:
                 gen_flower_time += 0.5 # generate a flower per 0.5 second
-                flower_index += 1
-                f = Flower(flower_index)
+                f = Flower()
                 flowers.add(f)
             
             # detect collide
@@ -99,7 +105,7 @@ if __name__ == "__main__":
 
         # update time
         time_msg = "Time: " + str(30-sec)
-        time_msg = time_font.render(time_msg, True, (255, 0, 0))
+        time_msg = time_font.render(time_msg, True, (255, 100, 0))
 
         canvas.blit(sky, (0,0))
         canvas.blit(score_msg, (10, 10))
@@ -108,9 +114,10 @@ if __name__ == "__main__":
         allsprite.draw(canvas)
 
         if not playing:
-            start_msg = "[PRESS SPACE TO START]"
-            start_msg = start_font.render(start_msg, True, (0, 0, 255))
-            canvas.blit(start_msg, (300, 400))
+            end_logo = start_font.render(end_msg, True, (0, 0, 255))
+            start_logo = start_font.render(start_msg, True, (0, 0, 255))
+            canvas.blit(end_logo, (450, 330))
+            canvas.blit(start_logo, (300, 400))
 
         pg.display.update()
 

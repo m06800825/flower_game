@@ -3,9 +3,8 @@ import os
 import random
 
 class Flower(pg.sprite.Sprite):
-    def __init__(self, index):
+    def __init__(self):
         pg.sprite.Sprite.__init__(self)
-        self.index = index
         self.image = pg.image.load(os.path.join('image', 'flower_removebg.png')).convert_alpha ()
         self.image = pg.transform.scale(self.image, (70, 70))
         self.rect = self.image.get_rect()
