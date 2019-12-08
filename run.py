@@ -14,7 +14,7 @@ if __name__ == "__main__":
     canvas = pg.display.set_mode((canvas_width, canvas_height))
     pg.display.set_caption("Anniversary game")
 
-    sky = pg.image.load(os.path.join('image', 'sky.jpg'))
+    sky = pg.image.load(os.path.join('image', 'grassland.png'))
     sky = pg.transform.scale(sky, (1200, 800))
 
     jane = Jane()
@@ -28,10 +28,22 @@ if __name__ == "__main__":
     # 0: wait to begin
     # 1: game is running
     game_mode = 0
+    now = pg.time.get_ticks()
 
     running = True
     while running:
         clock.tick(30)
+        time_difference = int((pg.time.get_ticks() - now)/100)
+        print(time_difference)
+        
+        # Flower
+        index = 0
+        if time_difference%10 == 0:
+            index += 1
+            f = Flower(index)
+            allsprite.add(f)
+
+
         for event in pg.event.get():
             # leave game
             if event.type == pg.QUIT:
@@ -39,6 +51,10 @@ if __name__ == "__main__":
             # check button down
             if event.type == pg.KEYDOWN:
                 # check ESC down
+                if event.key == pg.K_LEFT:
+                    jane.speed = -20
+                elif event.key == pg.K_RIGHT:
+                    jane.speed = 20
                 if event.key == pg.K_ESCAPE:
                     running = False
                 
@@ -48,8 +64,12 @@ if __name__ == "__main__":
             if event.type == pg.MOUSEBUTTONDOWN:
                 if(game_mode == 0):
                     game_mode = 1
-
+        
+        # update objects
         jane.update()
+        for flower in allsprite:
+            if hasattr(flower, 'index'):
+                flower.update()
 
         canvas.blit(sky, (0,0))
         allsprite.draw(canvas)

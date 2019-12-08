@@ -1,18 +1,16 @@
 import pygame as pg
 import os
+import random
 
 class Flower(pg.sprite.Sprite):
-    def __init__(self):
+    def __init__(self, index):
         pg.sprite.Sprite.__init__(self)
+        self.index = index
         self.image = pg.image.load(os.path.join('image', 'flower_removebg.png')).convert_alpha ()
         self.image = pg.transform.scale(self.image, (70, 70))
         self.rect = self.image.get_rect()
-        self.rect.x = 400
-        self.rect.y = 400
+        self.rect.x = int(random.random() * 1130)
+        self.rect.y = 0
 
-    def update(self):  
-        pos = pg.mouse.get_pos()  
-        self.rect.x = pos[0]       #滑鼠x坐標
-        #不要移出右邊界
-        # if self.rect.x > canvas.get_width() - self.rect.width:
-        #     self.rect.x = canvas.get_width() - self.rect.width
+    def update(self):
+        self.rect.y += 20

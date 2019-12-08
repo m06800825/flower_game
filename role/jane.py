@@ -7,12 +7,14 @@ class Jane(pg.sprite.Sprite):
         self.image = pg.image.load(os.path.join('image', 'jane_removebg.png')).convert_alpha ()
         self.image = pg.transform.scale(self.image, (150, 200))
         self.rect = self.image.get_rect()
-        self.rect.x = 400
-        self.rect.y = 400
+        self.rect.x = 525
+        self.rect.y = 600
+        self.speed = 0
 
-    def update(self):  
-        pos = pg.mouse.get_pos()  
-        self.rect.x = pos[0]       #滑鼠x坐標
+    def update(self):
+        self.rect.x += self.speed       #滑鼠x坐標
         # 不要移出右邊界
-        if self.rect.x > 1200 - self.rect.width:
+        if self.rect.x > (1200 - self.rect.width):
             self.rect.x = 1200 - self.rect.width
+        elif self.rect.x < 0:
+            self.rect.x = 0
