@@ -21,11 +21,22 @@ def play_bg_music(music_path):
     pg.mixer.music.play(-1, 0)
 
 
+def play_sound(sound_path):
+    # load sound
+    sound = pg.mixer.Sound(sound_path)
+    # set volume
+    sound.set_volume(0.1)
+    # play
+    sound.play()
+
+
 if __name__ == "__main__":
     pg.init()
     
-    # play background music
-    play_bg_music(os.path.join("music", "pacific.mp3"))
+    # music and sound
+    sound_path = os.path.join("music", "catch.wav")
+    music_path = os.path.join("music", "pacific.mp3")
+    play_bg_music(music_path)
 
     # initialize game window
     canvas_width = 1200
@@ -108,6 +119,7 @@ if __name__ == "__main__":
             # detect collide
             hit_flower = pg.sprite.spritecollide(role, flowers, True)  
             if len(hit_flower) > 0:
+                play_sound(sound_path)
                 score += len(hit_flower)
 
             # update objects
