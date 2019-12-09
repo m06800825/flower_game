@@ -12,14 +12,26 @@ def count_second(start_time):
     return total_time
 
 
+def play_bg_music(music_path):
+    # load music
+    pg.mixer.music.load(music_path)
+    # set volume
+    pg.mixer.music.set_volume(0.5)
+    # recursive playing
+    pg.mixer.music.play(-1, 0)
+
+
 if __name__ == "__main__":
     pg.init()
+    
+    # play background music
+    play_bg_music(os.path.join("music", "pacific.mp3"))
 
     # initialize game window
     canvas_width = 1200
     canvas_height = 750
     canvas = pg.display.set_mode((canvas_width, canvas_height))
-    pg.display.set_caption("Anniversary game")
+    pg.display.set_caption("Catch Flower Game")
 
     # initialize background
     grassland = pg.image.load(os.path.join('image', 'grassland.png'))
