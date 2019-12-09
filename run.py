@@ -6,31 +6,7 @@ from obj.flower import Flower
 from obj.role import Role
 
 
-def count_second(start_time):
-    last_time = time.time()
-    total_time = math.floor(last_time - start_time)
-    return total_time
-
-
-def play_bg_music(music_path):
-    # load music
-    pg.mixer.music.load(music_path)
-    # set volume
-    pg.mixer.music.set_volume(0.5)
-    # recursive playing
-    pg.mixer.music.play(-1, 0)
-
-
-def play_sound(sound_path):
-    # load sound
-    sound = pg.mixer.Sound(sound_path)
-    # set volume
-    sound.set_volume(0.3)
-    # play
-    sound.play()
-
-
-if __name__ == "__main__":
+def main():
     pg.init()
     
     # music and sound
@@ -151,3 +127,31 @@ if __name__ == "__main__":
 
     pg.quit()
     quit()
+
+
+def play_bg_music(music_path):
+    # load music
+    pg.mixer.music.load(music_path)
+    # set volume
+    pg.mixer.music.set_volume(0.5)
+    # recursive playing
+    pg.mixer.music.play(-1, 0)
+
+
+def play_sound(sound_path):
+    # load sound
+    sound = pg.mixer.Sound(sound_path)
+    # set volume
+    sound.set_volume(0.3)
+    # play
+    sound.play()
+
+
+def count_second(start_time):
+    last_time = time.time()
+    total_time = math.floor(last_time - start_time)
+    return total_time
+
+
+if __name__ == "__main__":
+    main()
