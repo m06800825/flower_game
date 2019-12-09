@@ -2,6 +2,7 @@ import pygame as pg
 import os
 import random
 
+
 class Player(pg.sprite.Sprite):
     def __init__(self, name="ken"):
         pg.sprite.Sprite.__init__(self)

@@ -17,7 +17,7 @@ def main():
     canvas_width = 1200
     canvas_height = 750
     canvas = pg.display.set_mode((canvas_width, canvas_height))
-    pg.display.set_caption("Catch Flower Game")
+    pg.display.set_caption("Anniversary Game")
 
     # initialize group
     arrows = pg.sprite.Group()
@@ -25,8 +25,8 @@ def main():
     players = pg.sprite.Group()
 
     # initialize menu
-    date = pg.image.load(os.path.join('image', 'date.png'))
-    date = pg.transform.scale(date, (1200, 750))
+    couple = pg.image.load(os.path.join('image', 'couple.png'))
+    couple = pg.transform.scale(couple, (1200, 750))
     arrow = Arrow()
     arrows.add(arrow)
 
@@ -83,7 +83,7 @@ def main():
                         players.add(player)
                         menu = False
 
-            canvas.blit(date, (0,0))
+            canvas.blit(couple, (0,0))
             menu_logo = message_font.render(menu_msg, True, (255, 0, 0))
             canvas.blit(menu_logo, (160, 650))
             arrows.draw(canvas)
