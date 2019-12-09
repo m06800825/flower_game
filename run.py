@@ -25,7 +25,7 @@ def play_sound(sound_path):
     # load sound
     sound = pg.mixer.Sound(sound_path)
     # set volume
-    sound.set_volume(0.1)
+    sound.set_volume(0.3)
     # play
     sound.play()
 
@@ -34,7 +34,7 @@ if __name__ == "__main__":
     pg.init()
     
     # music and sound
-    sound_path = os.path.join("music", "catch.wav")
+    sound_path = os.path.join("music", "sound.wav")
     music_path = os.path.join("music", "pacific.mp3")
     play_bg_music(music_path)
 
