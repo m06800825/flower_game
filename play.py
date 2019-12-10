@@ -17,7 +17,7 @@ def main():
     canvas_width = 1200
     canvas_height = 750
     canvas = pg.display.set_mode((canvas_width, canvas_height))
-    pg.display.set_caption("Anniversary Game")
+    pg.display.set_caption("9th Anniversary Game")
 
     # initialize group
     arrows = pg.sprite.Group()
@@ -45,10 +45,14 @@ def main():
     # initialize game message
     score_font = pg.font.SysFont("Arial", 40)
     time_font = pg.font.SysFont("Arial", 40)
-    message_font = pg.font.SysFont("Arial", 60)
-    menu_msg = "[PRESS SPACE TO CHOOSE PLAYER]"
-    end_msg = ""
-    start_msg = "[PRESS SPACE TO START]"
+
+    # initialize game message
+    menu_msg = pg.image.load(os.path.join('image', 'menu.png')).convert_alpha()
+    menu_msg = pg.transform.scale(menu_msg, (1000, 100))
+    start_msg = pg.image.load(os.path.join('image', 'start.png')).convert_alpha()
+    start_msg = pg.transform.scale(start_msg, (600, 100))
+    end_msg = pg.image.load(os.path.join('image', 'timeup.png')).convert_alpha()
+    end_msg = pg.transform.scale(end_msg, (300, 100))
 
     # initialize game status
     running = True
@@ -84,8 +88,7 @@ def main():
                         menu = False
 
             canvas.blit(couple, (0,0))
-            menu_logo = message_font.render(menu_msg, True, (255, 0, 0))
-            canvas.blit(menu_logo, (160, 650))
+            canvas.blit(menu_msg, (100, 650))
             arrows.draw(canvas)
 
         else:
@@ -120,7 +123,6 @@ def main():
             if playing:
                 sec = count_second(start_time)
                 if sec == 30:
-                    end_msg = "[TIME'S UP]"
                     playing = False
 
                 time_difference = int((time.time() - gen_flower_time) * 1000)
@@ -158,10 +160,9 @@ def main():
 
             if not playing:
                 # show message
-                end_logo = message_font.render(end_msg, True, (0, 0, 255))
-                start_logo = message_font.render(start_msg, True, (0, 0, 255))
-                canvas.blit(end_logo, (480, 330))
-                canvas.blit(start_logo, (300, 400))
+                if sec == 30:
+                    canvas.blit(end_msg, (450, 320))
+                canvas.blit(start_msg, (300, 390))
 
         pg.display.update()
 
