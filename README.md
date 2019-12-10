@@ -11,7 +11,7 @@
 
 ## How To Run
 * Open command prompt
-* ```git clone <url of this repository>```
+* ```git clone https://github.com/m06800825/flower_game.git```
 * ```cd flower_game```
 * ```python play.py```
 * Have fun!
