@@ -42,11 +42,11 @@ class Flower(pg.sprite.Sprite):
 class Arrow(pg.sprite.Sprite):
     def __init__(self):
         pg.sprite.Sprite.__init__(self)
-        self.image = pg.image.load(os.path.join('image', 'arrow_removebg.png')).convert_alpha()
-        self.image = pg.transform.scale(self.image, (80, 120))
+        self.image = pg.image.load(os.path.join('image', 'arrow_down.png')).convert_alpha()
+        self.image = pg.transform.scale(self.image, (80, 100))
         self.rect = self.image.get_rect()
         self.rect.x = 380
-        self.rect.y = 20
+        self.rect.y = 30
     
     def update(self, x_loc):
         self.rect.x = x_loc
