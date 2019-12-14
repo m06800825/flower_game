@@ -21,7 +21,7 @@ def main():
     # initialize game window
     canvas_width = 1200
     canvas_height = 750
-    canvas = pg.display.set_mode((canvas_width, canvas_height))
+    canvas = pg.display.set_mode((canvas_width, canvas_height), pg.FULLSCREEN)
     pg.display.set_caption("9th Anniversary Game")
 
     # initialize icon
