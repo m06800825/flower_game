@@ -182,20 +182,14 @@ def main():
 
 
 def play_bg_music(music_path):
-    # load music
     pg.mixer.music.load(music_path)
-    # set volume
     pg.mixer.music.set_volume(0.5)
-    # recursive playing
     pg.mixer.music.play(-1, 0)
 
 
 def play_sound(sound_path):
-    # load sound
     sound = pg.mixer.Sound(sound_path)
-    # set volume
     sound.set_volume(0.3)
-    # play
     sound.play()
 
 
