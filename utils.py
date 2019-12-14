@@ -31,12 +31,19 @@ class Flower(pg.sprite.Sprite):
         pg.sprite.Sprite.__init__(self)
         self.image = pg.image.load(os.path.join('image', 'flower_removebg.png')).convert_alpha()
         self.image = pg.transform.scale(self.image, (50, 50))
+        self.org_image = self.image
         self.rect = self.image.get_rect()
         self.rect.x = int(random.random() * 1150)
         self.rect.y = 0
+        self.angle = 0
+        self.angle_change = 10 * (1 if random.random() > 0.5 else -1)
 
     def update(self):
         self.rect.y += 20
+        if self.angle_change != 0:
+            self.angle += self.angle_change
+            self.image = pg.transform.rotozoom(self.org_image, self.angle, 1)
+            self.rect = self.image.get_rect(center=self.rect.center)
 
 
 class Arrow(pg.sprite.Sprite):

@@ -2,11 +2,16 @@ import os
 import pygame as pg
 import time
 import math
+import ctypes
 from utils import Player, Flower, Arrow
 
 
 def main():
     pg.init()
+
+    # initialize taskbar icon
+    myappid = 'mycompany.myproduct.subproduct.version' # arbitrary string
+    ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
     
     # music and sound
     sound_path = os.path.join("music", "sound.wav")
@@ -19,6 +24,11 @@ def main():
     canvas = pg.display.set_mode((canvas_width, canvas_height))
     pg.display.set_caption("9th Anniversary Game")
 
+    # initialize icon
+    icon = pg.image.load(os.path.join('image', 'flower_removebg.png')).convert_alpha()
+    icon = pg.transform.scale(icon, (30, 30))
+    pg.display.set_icon(icon)
+
     # initialize group
     arrows = pg.sprite.Group()
     flowers = pg.sprite.Group()
@@ -29,6 +39,7 @@ def main():
     couple = pg.transform.scale(couple, (1200, 750))
     arrow = Arrow()
     arrows.add(arrow)
+    
 
     # initialize background
     grassland = pg.image.load(os.path.join('image', 'grassland.png'))
